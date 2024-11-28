@@ -1,0 +1,64 @@
+.bank-pool {
+    border-radius: 10px;
+    border-color: black;
+    border-style: solid;
+    margin-bottom: 80px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
+    width:400px;
+    height: 200px; 
+    margin-left: 40%;
+    margin-top: 20px;
+}
+
+.col {
+    border-radius: 10px;
+    border-color: black;
+    border-style: solid;
+    margin-left: 50px;
+    margin-bottom: 100px;
+    background-image: url(https://media.istockphoto.com/id/1755578861/photo/handmade-paper-scan.webp?a=1&b=1&s=612x612&w=0&k=20&c=EO9gxm3tkLT_EQ_cpHKnnU3Fp-b5ZGEE4a0xbkTqwmM=)
+}
+
+body {
+    background-image: url(https://images.unsplash.com/photo-1548614229-c1fe21dfab63?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Nnx8fGVufDB8fHx8fA%3D%3D);
+}
+
+#btn1{
+    margin-bottom: 10px;
+    border-radius: 8px;
+    background-color: cornsilk;
+}
+
+#btn2{
+    margin-bottom: 10px;
+    border-radius: 8px;
+    background-color: cornsilk;
+}
+
+
+#btn3{
+    margin-bottom: 10px;
+    border-radius: 8px;
+    background-color: cornsilk;
+}
+
+#btn4{
+    margin-bottom: 10px;
+    border-radius: 8px;
+    background-color: cornsilk;
+}
+
+#btn5{
+    margin-bottom: 10px;
+    border-radius: 8px;
+    background-color: cornsilk;
+}
+
+#btn6{
+    margin-bottom: 10px;
+    border-radius: 8px;
+    background: cornsilk;
+}
