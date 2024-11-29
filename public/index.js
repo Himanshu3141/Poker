@@ -1,4 +1,7 @@
 const bank = document.getElementById("bank");
+const roundsInput = document.getElementById("rounds");
+const startButton = document.getElementById("start");
+const resetButton = document.getElementById("reset");
 
 const p1value = document.getElementById("1");
 const p2value = document.getElementById("2");
@@ -14,122 +17,109 @@ const p4btn = document.getElementById("btn4");
 const p5btn = document.getElementById("btn5");
 const p6btn = document.getElementById("btn6");
 
-let p1 = parseInt(1000000);
-let p2 = parseInt(1000000);
-let p3 = parseInt(1000000);
-let p4 = parseInt(1000000);
-let p5 = parseInt(1000000);
-let p6 = parseInt(1000000);
+let players = [
+  { id: "Player 1", balance: 1000000, inputId: "inp1", btnId: "btn1", valueId: "1" },
+  { id: "Player 2", balance: 1000000, inputId: "inp2", btnId: "btn2", valueId: "2" },
+  { id: "Player 3", balance: 1000000, inputId: "inp3", btnId: "btn3", valueId: "3" },
+  { id: "Player 4", balance: 1000000, inputId: "inp4", btnId: "btn4", valueId: "4" },
+  { id: "Player 5", balance: 1000000, inputId: "inp5", btnId: "btn5", valueId: "5" },
+  { id: "Player 6", balance: 1000000, inputId: "inp6", btnId: "btn6", valueId: "6" }
+];
 
-let bvalue = parseInt(0);
+let totalRounds = 0;
+let currentRound = 0;
+let currentPlayerIndex = 0;
+let bvalue = 0;
 
-p1value.innerText = p1;
-p2value.innerText = p2;
-p3value.innerText = p3;
-p4value.innerText = p4;
-p5value.innerText = p5;
-p6value.innerText = p6;  // Now Player 6's value is correctly initialized.
+function initializePlayers() {
+  players.forEach(player => {
+    document.getElementById(player.valueId).innerText = player.balance;
+    document.getElementById(player.btnId).onclick = () => handleBid(player);
+  });
+}
 
-p1btn.onclick = function () {
-  var v1 = parseInt(document.getElementById("inp1").value);
-  if (isNaN(v1) || v1 <= 0) {
-    alert("Please enter a valid positive number");
+function handleBid(player) {
+  const input = document.getElementById(player.inputId);
+  const bidAmount = parseInt(input.value);
+
+  if (isNaN(bidAmount) || bidAmount <= 0) {
+    alert("Please enter a valid positive number.");
     return;
   }
-  bvalue += v1;
-  bank.innerText = bvalue;
-  p1 -= v1;
-  p1value.innerText = p1;
-};
 
-p2btn.onclick = function () {
-  var v2 = parseInt(document.getElementById("inp2").value);
-  if (isNaN(v2) || v2 <= 0) {
-    alert("Please enter a valid positive number");
+  if (player.balance <= 0) {
+    alert("You have no balance to bid.");
     return;
   }
-  bvalue += v2;
-  bank.innerText = bvalue;
-  p2 -= v2;
-  p2value.innerText = p2;
-};
 
-p3btn.onclick = function () {
-  var v3 = parseInt(document.getElementById("inp3").value);
-  if (isNaN(v3) || v3 <= 0) {
-    alert("Please enter a valid positive number");
+  if (bidAmount > player.balance) {
+    alert("You cannot bid more than your current balance.");
     return;
   }
-  bvalue += v3;
-  bank.innerText = bvalue;
-  p3 -= v3;
-  p3value.innerText = p3;
-};
 
-p4btn.onclick = function () {
-  var v4 = parseInt(document.getElementById("inp4").value);
-  if (isNaN(v4) || v4 <= 0) {
-    alert("Please enter a valid positive number");
+  bvalue += bidAmount;
+  bank.innerText = bvalue;
+  player.balance -= bidAmount;
+  document.getElementById(player.valueId).innerText = player.balance;
+
+ 
+  currentPlayerIndex++;
+
+  if (currentPlayerIndex >= players.length) {
+    currentPlayerIndex = 0;
+    currentRound++;
+
+    if (currentRound >= totalRounds) {
+      endGame();
+      return;
+    }
+
+    alert(`Round ${currentRound} completed! Starting next round.`);
+  }
+}
+
+function startGame() {
+  totalRounds = parseInt(roundsInput.value);
+  if (isNaN(totalRounds) || totalRounds <= 0) {
+    alert("Please enter a valid number of rounds.");
     return;
   }
-  bvalue += v4;
-  bank.innerText = bvalue;
-  p4 -= v4;
-  p4value.innerText = p4;
-};
 
-p5btn.onclick = function () {
-  var v5 = parseInt(document.getElementById("inp5").value);
-  if (isNaN(v5) || v5 <= 0) {
-    alert("Please enter a valid positive number");
-    return;
-  }
-  bvalue += v5;
-  bank.innerText = bvalue;
-  p5 -= v5;
-  p5value.innerText = p5;
-};
+  currentRound = 0;
+  currentPlayerIndex = 0;
+  resetGame();
+  alert("Game started! Players can start bidding.");
+}
 
-p6btn.onclick = function () {
-  var v6 = parseInt(document.getElementById("inp6").value); // Convert input to integer
-  if (isNaN(v6) || v6 <= 0) {
-    alert("Please enter a valid positive number");
-    return;
-  }
-  bvalue += v6; 
-  bank.innerText = bvalue;
-  p6 -= v6;
-  p6value.innerText = p6;
-};
-
-document.getElementById("reset").onclick = function () {
-  const id = document.getElementById("winner").value;
-  switch (id) {
-    case "1":
-      p1 += bvalue;
-      p1value.innerText = p1;
-      break;
-    case "2":
-      p2 += bvalue;
-      p2value.innerText = p2;
-      break;
-    case "3":
-      p3 += bvalue;
-      p3value.innerText = p3;
-      break;
-    case "4":
-      p4 += bvalue;
-      p4value.innerText = p4;
-      break;
-    case "5":
-      p5 += bvalue;
-      p5value.innerText = p5;
-      break;
-    case "6":
-      p6 += bvalue;
-      p6value.innerText = p6;
-      break;
-  }
+function resetGame() {
   bvalue = 0;
   bank.innerText = bvalue;
-};
+  players.forEach(player => {
+    player.balance = 1000000;
+    document.getElementById(player.valueId).innerText = player.balance;
+  });
+
+  currentRound = 0;
+  currentPlayerIndex = 0;
+}
+
+function endGame() {
+  const winner = players
+    .filter(player => player.balance > 0)
+    .sort((a, b) => b.balance - a.balance)[0];
+
+  if (winner) {
+    alert(`${winner.id} is the winner with a balance of ${winner.balance}!`);
+  } else {
+    alert("No winner as all players have zero balance.");
+  }
+
+  players.forEach(player => {
+    document.getElementById(player.btnId).disabled = true;
+  });
+}
+
+initializePlayers();
+
+startButton.onclick = startGame;
+resetButton.onclick = resetGame;

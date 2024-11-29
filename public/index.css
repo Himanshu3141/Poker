@@ -7,7 +7,7 @@
     display: flex;
     justify-content: center;
     background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
-    width:400px;
+    width: 400px;
     height: 200px; 
     margin-left: 40%;
     margin-top: 20px;
@@ -26,39 +26,63 @@ body {
     background-image: url(https://images.unsplash.com/photo-1548614229-c1fe21dfab63?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Nnx8fGVufDB8fHx8fA%3D%3D);
 }
 
-#btn1{
-    margin-bottom: 10px;
-    border-radius: 8px;
-    background-color: cornsilk;
+#start {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-#btn2{
-    margin-bottom: 10px;
-    border-radius: 8px;
-    background-color: cornsilk;
+#start:hover {
+    background-color: #218838;
 }
 
-
-#btn3{
-    margin-bottom: 10px;
-    border-radius: 8px;
-    background-color: cornsilk;
+#reset {
+    background-color: #d13847;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 0.5rem;
 }
 
-#btn4{
-    margin-bottom: 10px;
-    border-radius: 8px;
-    background-color: cornsilk;
+#reset:hover {
+    background-color: #c82333;
 }
 
-#btn5{
+[id^="btn"] {
     margin-bottom: 10px;
-    border-radius: 8px;
-    background-color: cornsilk;
+    border-radius: 12px;
+    background-color: #fdf5e6;
+    color: #333;
+    border: solid;
+    padding: 8px 18px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-#btn6{
-    margin-bottom: 10px;
-    border-radius: 8px;
-    background: cornsilk;
+[id^="btn"]:hover {
+    background-color: #f0e4c3;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+[id^="btn"]:active {
+    background-color: #e8d8b7;
+    box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.2);
+    transform: translateY(1px);
 }
